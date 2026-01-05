@@ -1,0 +1,15 @@
+# Pixlet binary
+pixlet
+
+# Rendered outputs
+*.webp
+*.gif
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
