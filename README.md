@@ -2,6 +2,12 @@
 
 Tidbyt/Pixlet applets for displaying Gitea repository statistics on a [Tidbyt](https://tidbyt.com/) display.
 
+## Screenshots
+
+| Activity | CI Status |
+|----------|-----------|
+| ![Activity](screenshots/activity.png) | ![CI Status](screenshots/ci_status.png) |
+
 ## Apps
 
 ### Gitea CI Status (`gitea_ci_status.star`)
