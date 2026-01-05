@@ -1,6 +1,8 @@
-# Gitea Tidbyt Apps
+# Gitea Tidbyt/Tronbyt Apps
 
-Tidbyt/Pixlet applets for displaying Gitea repository statistics on a [Tidbyt](https://tidbyt.com/) display.
+Pixlet applets for displaying Gitea repository statistics on [Tidbyt](https://tidbyt.com/) and [Tronbyt](https://github.com/tronbyt) displays.
+
+> **Note:** Tidbyt was [acquired by Modal](https://hackaday.com/2025/03/29/open-source-framework-aims-to-keep-tidbyt-afloat/) in late 2024 and is no longer producing new devices. While existing cloud services continue for now, the future is uncertain. Consider using [Tronbyt](https://github.com/tronbyt) — an open-source replacement that lets you run these apps locally without cloud dependency.
 
 ## Screenshots
 
@@ -61,11 +63,22 @@ pixlet serve gitea_ci_status.star
 pixlet push --installation-id gitea-ci <DEVICE_ID> gitea_ci_status.webp
 ```
 
+## Using with Tronbyt
+
+[Tronbyt](https://github.com/tronbyt) is an open-source ecosystem that frees your Tidbyt from cloud dependency:
+
+1. **Flash your Tidbyt** with [Tronbyt firmware](https://github.com/tronbyt/firmware-esp32)
+2. **Run the server** locally using [Tronbyt Server](https://github.com/tronbyt/server)
+3. **Render apps** with [Tronbyt's Pixlet fork](https://github.com/tronbyt/pixlet)
+4. **Push to your device** — apps run entirely on your local network
+
+This gives you full control over your display without relying on external services.
+
 ## Requirements
 
-- [Pixlet](https://github.com/tidbyt/pixlet) CLI tool
+- [Pixlet](https://github.com/tidbyt/pixlet) (or [Tronbyt Pixlet](https://github.com/tronbyt/pixlet)) CLI tool
 - Gitea instance with API access
-- (Optional) Tidbyt device for physical display
+- Tidbyt/Tronbyt device for physical display
 
 ## License
 
