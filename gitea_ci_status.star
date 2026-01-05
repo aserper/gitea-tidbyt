@@ -6,12 +6,16 @@ Author: amit
 """
 
 load("cache.star", "cache")
+load("encoding/base64.star", "base64")
 load("encoding/json.star", "json")
 load("http.star", "http")
 load("humanize.star", "humanize")
 load("render.star", "render")
 load("schema.star", "schema")
 load("time.star", "time")
+
+# Gitea logo as base64-encoded PNG (16x16, will be scaled down)
+GITEA_LOGO_BASE64 = "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"
 
 # Gitea brand colors
 GITEA_GREEN = "#609926"
@@ -39,69 +43,11 @@ DEFAULT_GITEA_URL = "https://gitea.example.com"
 DEFAULT_REPOS = "owner/repo"
 
 def gitea_icon():
-    """7x8 pixel git branch icon in Gitea green."""
-    G = GITEA_GREEN
-    _ = "#00000000"
-
-    return render.Column(
-        children = [
-            # Row 0: Top commit (3px wide)
-            render.Row(children = [
-                render.Box(width = 2, height = 1, color = _),
-                render.Box(width = 3, height = 1, color = G),
-                render.Box(width = 2, height = 1, color = _),
-            ]),
-            # Row 1: Line down
-            render.Row(children = [
-                render.Box(width = 3, height = 1, color = _),
-                render.Box(width = 1, height = 1, color = G),
-                render.Box(width = 3, height = 1, color = _),
-            ]),
-            # Row 2: Horizontal fork line
-            render.Row(children = [
-                render.Box(width = 1, height = 1, color = _),
-                render.Box(width = 5, height = 1, color = G),
-                render.Box(width = 1, height = 1, color = _),
-            ]),
-            # Row 3: Two branches down
-            render.Row(children = [
-                render.Box(width = 1, height = 1, color = _),
-                render.Box(width = 1, height = 1, color = G),
-                render.Box(width = 3, height = 1, color = _),
-                render.Box(width = 1, height = 1, color = G),
-                render.Box(width = 1, height = 1, color = _),
-            ]),
-            # Row 4: Continue branches
-            render.Row(children = [
-                render.Box(width = 1, height = 1, color = _),
-                render.Box(width = 1, height = 1, color = G),
-                render.Box(width = 3, height = 1, color = _),
-                render.Box(width = 1, height = 1, color = G),
-                render.Box(width = 1, height = 1, color = _),
-            ]),
-            # Row 5: Continue branches
-            render.Row(children = [
-                render.Box(width = 1, height = 1, color = _),
-                render.Box(width = 1, height = 1, color = G),
-                render.Box(width = 3, height = 1, color = _),
-                render.Box(width = 1, height = 1, color = G),
-                render.Box(width = 1, height = 1, color = _),
-            ]),
-            # Row 6: Continue branches
-            render.Row(children = [
-                render.Box(width = 1, height = 1, color = _),
-                render.Box(width = 1, height = 1, color = G),
-                render.Box(width = 3, height = 1, color = _),
-                render.Box(width = 1, height = 1, color = G),
-                render.Box(width = 1, height = 1, color = _),
-            ]),
-            # Row 7: Bottom commits (2px each)
-            render.Row(children = [
-                render.Box(width = 2, height = 1, color = G),
-                render.Box(width = 3, height = 1, color = _),
-                render.Box(width = 2, height = 1, color = G),
-            ]),
-        ],
+    """Gitea logo icon scaled to 8x8 pixels."""
+    return render.Image(
+        src = base64.decode(GITEA_LOGO_BASE64),
+        width = 8,
+        height = 8,
     )
 
 def main(config):
